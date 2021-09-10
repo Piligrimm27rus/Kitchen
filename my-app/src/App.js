@@ -1,22 +1,31 @@
 import logo from './logo.svg';
 import './App.css';
+import Header from './components/header/header';
+import React from 'react';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component{
+  constructor(props){
+      super(props);
+      this.state = { 
+      clicks: 0,
+    };
+    
+    this.plusOne = this.plusOne.bind(this);
+  }
+  
+  plusOne() {
+    let currentClicks = this.state.clicks;
+    this.setState({clicks: currentClicks +1 });
+  }
+    
+  render(){  
+    return [
+      <Header clicks = {this.state.clicks} clickbtn={ () => this.plusOne()} title = "Шапка 1"/>,
+      <Header clicks = {this.state.clicks} clickbtn={ () => this.plusOne()} title="Шапка 2"/>,
+      <Header clicks = {this.state.clicks} clickbtn={ () => this.plusOne()} title="Шапка 3"/>,
+      <Header clicks = {this.state.clicks} clickbtn={ () => this.plusOne()} title="Шапка 4"/>,
+      <Header clicks = {this.state.clicks} clickbtn={ () => this.plusOne()} title="Шапка 5"/>   
+    ];
+  }
 }
-
 export default App;
