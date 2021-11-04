@@ -7,7 +7,6 @@ import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import InputBase from '@mui/material/InputBase';
-import MenuIcon from '@mui/icons-material/Menu';
 import SvgIcon from '@mui/material/SvgIcon';
 import SearchIcon from '@mui/icons-material/Search';
 import Stack from '@mui/material/Stack';
@@ -91,11 +90,11 @@ class Header extends React.Component {
 
                         <RouteContextMenu>
                             <Stack spacing={5} direction="row">
-                                <Button variant="contained" href="#outlined-buttons1" ms={2}>Link</Button>
-                                <Button variant="contained" href="#outlined-buttons2" ms={2}>Link</Button>
-                                <Button variant="contained" href="#outlined-buttons3" ms={2}>Link</Button>
-                                <Button variant="contained" href="#outlined-buttons4" ms={2}>Link</Button>
-                                <Button variant="contained" href="#outlined-buttons5" ms={2}>Link</Button>
+                                <Button variant="contained" href="#outlined-buttons1" ms={2}>Главная</Button>
+                                <Button variant="contained" href="#outlined-buttons2" ms={2}>Рецепты</Button>
+                                <Button variant="contained" href="#outlined-buttons3" ms={2}>Уроки</Button>
+                                <Button variant="contained" href="#outlined-buttons4" ms={2}>Авторы</Button>
+                                <Button variant="contained" href="#outlined-buttons5" ms={2}>Идеи</Button>
                             </Stack>
                         </RouteContextMenu>
 

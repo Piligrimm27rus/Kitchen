@@ -1,3 +1,15 @@
 .tool-bar {
     background-color: rgb(26, 25, 26);
 }
+
+.css-1uyqgih-Button { 
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: start;
+    justify-content: flex-start;
+    padding: 0px 15px;
+    text-transform: none;
+    font: 12px / 40px "PT Sans", Helvetica, sans-serif;
+    letter-spacing: 0px;
+}
