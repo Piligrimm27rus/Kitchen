@@ -2,6 +2,7 @@ import React from 'react';
 import '../../../App.css';
 import GridReceptsContextMenu from './../../GridReceptsContextMenu';
 import SwipeableTextMobileStepper from './../../SwipeableTextMobileStepper';
+import GridBestAutors from './../../GridBestAutors';
 import GridNewsMainPage from './../../GridNewsMainPage';
 import Typography from '@mui/material/Typography';
 
@@ -23,6 +24,8 @@ class MainPage extends React.Component {
                 <SwipeableTextMobileStepper/>
 
                 <GridNewsMainPage/>
+
+                <GridBestAutors/>
             </div>
         )
     }

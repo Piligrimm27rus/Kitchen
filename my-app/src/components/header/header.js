@@ -7,18 +7,10 @@ import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import InputBase from '@mui/material/InputBase';
-import SvgIcon from '@mui/material/SvgIcon';
+import KitchenIcon from '@mui/icons-material/Kitchen';
 import SearchIcon from '@mui/icons-material/Search';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
-
-function HomeIcon(props) {
-    return (
-        <SvgIcon {...props}>
-            <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
-        </SvgIcon>
-    );
-}
 
 const RouteContextMenu = styled('div')(({ theme }) => ({
     padding: theme.spacing(0, 0),
@@ -80,7 +72,7 @@ class Header extends React.Component {
 
                         <IconButton size="large" edge="start" color="inherit" aria-label="open drawer" sx={{ mr: 2 }}>
 
-                            <HomeIcon />
+                            <KitchenIcon />
 
                         </IconButton>
 
