@@ -7,24 +7,8 @@ import TextField from '@mui/material/TextField';
 import Modal from '@mui/material/Modal';
 import CustomizedHookAdd from './CustomizedHookAdd';
 import CustomizedHookExlude from './CustomizedHookExlude';
+import { useEffect } from 'react';
 
-
-const category = [
-  { label: 'Любая категория', category_id: 0 },
-  { label: 'Заготовки', category_id: 1 },
-  { label: 'Выпечка и десерты', category_id: 2 },
-  { label: 'Основные блюда', category_id: 3 },
-  { label: 'Завтраки', category_id: 4 },
-  { label: 'Салаты', category_id: 5 },
-  { label: 'Супы', category_id: 6 },
-  { label: 'Паста и пицца', category_id: 7 },
-  { label: 'Закуски', category_id: 8 },
-  { label: 'Сендвичи', category_id: 9 },
-  { label: 'Ризотто', category_id: 10 },
-  { label: 'Напитки', category_id: 11 },
-  { label: 'Соусы и маринады', category_id: 12 },
-  { label: 'Бульоны', category_id: 13 },
-];
 const dish = [
   { label: 'Любое блюдо', category_id: 0, dish_id: 0 },
   { label: 'Варенье', category_id: 1, dish_id: 1 },
@@ -151,14 +135,55 @@ const style = {
   p: 4,
 };
 
-Button.propTypes = {
-  sx: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
-};
+
 
 export default function GridReceptsContextMenu() {
-  const [categoryChoosed, setValue] = React.useState(category[0].category_id);
-  const [dishChoosed, setValueDish] = React.useState(dish[0].dish_id);
-  const [kitchenChoosed, setValueKitchen] = React.useState(kitchen[0].kitchen_id);
+  const [categores, setCategores] = React.useState([{"id":1,"categoryName":"Любая категория"}]);
+  const [dish, setDish] = React.useState([{"id":1,"dishName":"Любая категория","categoryId":0}]);
+  const [kitchen, setKitchen] = React.useState([{"id":1,"kitchenName":"Все кухни"}]);
+
+  useEffect(() => {
+    fetch("http://localhost:3001/categores")
+      .then(res => res.json())
+      .then(
+        (result) => {
+          setCategores(result);
+        },
+        (error) => {
+          alert(error);
+        }
+      )
+  }, [])
+  
+  useEffect(() => {
+    fetch("http://localhost:3001/dish")
+      .then(res => res.json())
+      .then(
+        (result) => {
+          setDish(result);
+        },
+        (error) => {
+          alert(error);
+        }
+      )
+  }, [])
+
+  useEffect(() => {
+    fetch("http://localhost:3001/kitchen")
+      .then(res => res.json())
+      .then(
+        (result) => {
+          setKitchen(result);
+        },
+        (error) => {
+          alert(error);
+        }
+      )
+  }, [])
+
+  const [categoryChoosed, setValue] = React.useState(1);
+  const [dishChoosed, setValueDish] = React.useState(1);
+  const [kitchenChoosed, setValueKitchen] = React.useState(1);
 
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -170,15 +195,18 @@ export default function GridReceptsContextMenu() {
 
         <Autocomplete disablePortal
           onChange={(event, newValue) => {
-            setValue(newValue !== null ? newValue.category_id : 0);
+            setValue(newValue !== null ? categores.find(f => f["categoryName"] === newValue).id : 1);
+            setValueDish(1);
           }}
-          options={category} sx={{ width: 200, gridRow: '2', gridColumn: '3/4', fontWeight: 'fontWeightLight' }} renderInput={(params) => <TextField {...params} label="Категория" />} />
+          options={categores.map(a => a['categoryName'])} sx={{ width: 200, gridRow: '2', gridColumn: '3/4', fontWeight: 'fontWeightLight' }} renderInput={(params) => <TextField {...params} label="Категория" />} />
+        
         <Autocomplete onChange={(event, newValue) => {
-          setValueDish(newValue.dish_id);
-        }} disablePortal options={dish.filter(d => d.category_id === categoryChoosed)} sx={{ width: 200, gridRow: '2', gridColumn: '5/6', fontWeight: 'fontWeightLight' }} renderInput={(params) => <TextField {...params} label="Блюдо" />} />
+          setValueDish(newValue !== null ? dish.find(f => f["dishName"] === newValue).id : 1);
+        }} disablePortal options={dish.filter(d => d.categoryId === categoryChoosed).map(a => a.dishName)} sx={{ width: 200, gridRow: '2', gridColumn: '5/6', fontWeight: 'fontWeightLight' }} renderInput={(params) => <TextField {...params} label="Блюдо" />} />
+        
         <Autocomplete onChange={(event, newValue) => {
-          setValueKitchen(newValue.kitchen_id);
-        }} disablePortal options={kitchen} sx={{ width: 200, gridRow: '2', gridColumn: '7/8', fontWeight: 'fontWeightLight' }} renderInput={(params) => <TextField {...params} label="Кухня" />} />
+          setValueKitchen(newValue !== null ? kitchen.find(f => f["kitchenName"] === newValue).id : 1);
+        }} disablePortal options={kitchen.map(k => k.kitchenName)} sx={{ width: 200, gridRow: '2', gridColumn: '7/8', fontWeight: 'fontWeightLight' }} renderInput={(params) => <TextField {...params} label="Кухня" />} />
 
       </Box>
 
